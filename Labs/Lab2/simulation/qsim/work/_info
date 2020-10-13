@@ -1,0 +1,96 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Justin/Documents/University/Waterloo 1B/ECE 124/Lab2/simulation/qsim
+Elogicalstep_lab2_top
+Z1 w1592624094
+Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z3 DPx11 fiftyfivenm 21 fiftyfivenm_atom_pack 0 22 hIbO9BBYYWGW_8lVV<F893
+Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z7 DPx11 fiftyfivenm 22 fiftyfivenm_components 0 22 [A0e0UP4j3EDHZ:h0KOS^3
+R0
+Z8 8LogicalStep_Lab2_top.vho
+Z9 FLogicalStep_Lab2_top.vho
+l0
+L35
+V3<SVHOl1I6_TCzHjIXacV0
+!s100 CgU6YX9ZmiJ`CU6f:a83V2
+Z10 OV;C;10.5b;63
+32
+Z11 !s110 1592624095
+!i10b 1
+Z12 !s108 1592624095.000000
+Z13 !s90 -work|work|LogicalStep_Lab2_top.vho|
+Z14 !s107 LogicalStep_Lab2_top.vho|
+!i113 1
+Z15 o-work work
+Z16 tExplicit 1 CvgOpt 0
+Astructure
+R2
+R3
+R4
+R5
+R6
+R7
+DEx4 work 20 logicalstep_lab2_top 0 22 3<SVHOl1I6_TCzHjIXacV0
+l124
+L43
+VdbnoS;LOmc>]5^aGm2_K[2
+!s100 4905V`STK7mPzIChe6enc2
+R10
+32
+R11
+!i10b 1
+R12
+R13
+R14
+!i113 1
+R15
+R16
+Elogicalstep_lab2_top_vhd_vec_tst
+Z17 w1592624093
+R5
+R6
+R0
+Z18 8Waveform3.vwf.vht
+Z19 FWaveform3.vwf.vht
+l0
+L32
+VjneBQNHSM1P=gCcDk<WbB3
+!s100 XLcK^^jGZE?j23Z:jfFoQ1
+R10
+32
+R11
+!i10b 1
+R12
+Z20 !s90 -work|work|Waveform3.vwf.vht|
+Z21 !s107 Waveform3.vwf.vht|
+!i113 1
+R15
+R16
+Alogicalstep_lab2_top_arch
+R5
+R6
+Z22 DEx4 work 32 logicalstep_lab2_top_vhd_vec_tst 0 22 jneBQNHSM1P=gCcDk<WbB3
+l47
+L34
+V_RPUO9g[KPk8ZiicXh6e<2
+!s100 Ze3gzPG5lH^8Ul0FXW^XT0
+R10
+32
+R11
+!i10b 1
+R12
+R20
+R21
+!i113 1
+R15
+R16

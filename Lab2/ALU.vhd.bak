@@ -1,0 +1,89 @@
+-- Group 17: Yuhao Chen & Gurvijaypal Aujla
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+
+entity ALU is
+	port(
+			hex_A, hex_B, hex_C, hex_D		:	in std_logic_vector(3 downto 0);
+			op_select_A							:	in std_logic_vector(1 downto 0);
+			op_select_B							:	in std_logic_vector(1 downto 0);
+			logic_proc_Select					: 	in std_logic_vector(1 downto 0);
+			cin									:	in	std_logic;
+			mux_selector						:	in std_logic;
+			ALU_output							:	out std_logic_vector(3 downto 0);
+			ALU_carry							:	out std_logic;
+			indicator							:	out std_logic;
+			);
+end ALU;
+
+architecture ALU_logic of ALU is
+
+-- Declare any Components to be Used ---
+------------------------------------------------------------------- 
+ component hex_mux
+ 	port (
+			hex_num3, hex_num2, hex_num1, hex_num0 : in std_logic_vector(3 downto 0);
+			mux_select 										: in std_logic_vector(1 downto 0); 
+			hex_out 											: out std_logic_vector(3 downto 0)
+			);
+
+ end component;
+ 
+ component full_adder_4bit 
+ 	port (
+			cin						: in std_logic;
+			hex_val_A, hex_val_B	: in std_logic_vector(3 downto 0);
+			hex_sum 					: out std_logic_vector(3 downto 0);
+		   carry_out				: out std_logic
+			);
+
+ end component;
+
+component logic_proc
+	port (
+		hex_num1, hex_num0	: in	std_logic_vector(3 downto 0);
+		mux_select				: in	std_logic_vector(1 downto 0);
+		hex_out					: out	std_logic_vector(3 downto 0)
+		);
+		
+end component;
+
+component hex_2_to_1_mux
+	port (
+			hex_num1, hex_num0	:	in std_logic_vector(3 downto 0);
+			mux_select				:	in std_logic;
+			hex_out					:	out std_logic_vector(3 downto 0);
+			);
+end component;
+
+component 
+
+signal mux_A_out			:	std_logic_vector(3 downto 0);
+signal mux_B_out			:	std_logic_vector(3 downto 0);
+signal full_adder_out	:	std_logic_vector(3 downto 0);
+signal logic_proc_out	:	std_logic_vector(3 downto 0);
+signal carry_out			: 	std_logic;
+
+begin
+muxA: hex_mux port map( hex_D, hex_C, hex_B, hex_A,
+								op_select_A,
+								mux_A_out);
+								
+muxB: hex_mux port map( hex_D, hex_C, hex_B, hex_A,
+								op_select_B,
+								mux_B_out);
+
+adder: full_adder_4bit port map ( cin, mux_A_out, mux_B_out, full_adder_out, carry_out);
+
+log_proc: logic_proc port map ( mux_A_out, mux_B_out, logic_proc_select, logic_proc_out);
+
+muxC: hex_2_to_1_mux port map (full_adder_out, logic_proc_out, mux_selector, ALU_output);
+
+ALU_carry <= carry_out AND mux_selector;
+indicator <= mux_selector;
+
+
+end ALU_logic

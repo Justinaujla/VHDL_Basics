@@ -1,0 +1,9 @@
+-- Group 17: Yuhao Chen & Gurvijaypal Aujla
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux is port (
+ 	a, b: in std_logic_vector(3 downto 0);	
+   lt, eq, gt : out std_logic
+); 
+end Compx4;

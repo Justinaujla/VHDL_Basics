@@ -1,0 +1,60 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+Entity U_D_Bin_Counter4bit is port
+	(
+		CLK				:	in std_logic := '0';
+		RESET_n			:	in std_logic := '0';
+		x_target			:	in std_logic_vector(3 downto 0);
+		y_target			:	in std_logic_vector(3 downto 0);
+	);
+end Entity;
+	
+ARCHITECTURE one of U_D_Bin_Counter4bit IS
+
+--
+-- Provided Project Components Used
+------------------------------------------------------------------- 
+
+
+-- Add Other Components here
+-------------------------------------------------------------------
+
+	
+component U_D_Bin_Counter4bit port
+	(
+		CLK				:	in std_logic := '0';
+		RESET_n			:	in std_logic := '0';
+		MOTION_EN		:	in std_logic := '0';
+		UP1_DOWN0		:	in std_logic := '0';
+		COUNTER_BITS	:	out std_logic_vector(3 downto 0)
+	);
+end component;
+
+	
+-- Create any signals to be used
+------------------------------------------------------------------- 
+	
+signal button_last_state 	: std_logic := 0;
+signal x_target_pos: 		: std_logic_vector(3 downto 0);
+signal y__target_pos:		: std_logic_vector(3 downto 0);
+signal x_current_pos:		: std_logic_vector(3 downto 0);
+signal y_current_pos:		: std_logic_vector(3 downto 0);
+
+-- Here the circuit begins
+	
+BEGIN
+
+process (MOTION_EN) is
+begin
+	if (falling_edge(MOTION_EN)) then
+		x_target_pos <= x_target;
+		y_target_pos <= y_target;
+	end if;
+end process;
+
+
+
+end;
+		

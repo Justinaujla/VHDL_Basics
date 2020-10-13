@@ -1,0 +1,274 @@
+|LogicalStep_Lab4_top
+Clk => RAC_movement:inst1.CLK
+Clk => RAC_extender:inst2.clk_input
+rst_n => RAC_movement:inst1.RESET_n
+rst_n => RAC_extender:inst2.rst_n
+rst_n => RAC_grappler:inst3.rst_n
+pb[0] => RAC_grappler:inst3.grappler_toggle
+pb[1] => RAC_extender:inst2.extender_toggle
+pb[2] => RAC_movement:inst1.MOTION_EN
+pb[3] => RAC_movement:inst1.CLK_EN
+sw[0] => RAC_movement:inst1.y_target[0]
+sw[1] => RAC_movement:inst1.y_target[1]
+sw[2] => RAC_movement:inst1.y_target[2]
+sw[3] => RAC_movement:inst1.y_target[3]
+sw[4] => RAC_movement:inst1.x_target[0]
+sw[5] => RAC_movement:inst1.x_target[1]
+sw[6] => RAC_movement:inst1.x_target[2]
+sw[7] => RAC_movement:inst1.x_target[3]
+leds[0] << RAC_movement:inst1.Error_led
+leds[1] << <GND>
+leds[2] << <GND>
+leds[3] << RAC_grappler:inst3.grappler_open1_closed0
+leds[4] << RAC_extender:inst2.state_output[0]
+leds[5] << RAC_extender:inst2.state_output[1]
+leds[6] << RAC_extender:inst2.state_output[2]
+leds[7] << RAC_extender:inst2.state_output[3]
+leds[8] << RAC_movement:inst1.y_leds[0]
+leds[9] << RAC_movement:inst1.y_leds[1]
+leds[10] << RAC_movement:inst1.y_leds[2]
+leds[11] << RAC_movement:inst1.y_leds[3]
+leds[12] << RAC_movement:inst1.x_leds[0]
+leds[13] << RAC_movement:inst1.x_leds[1]
+leds[14] << RAC_movement:inst1.x_leds[2]
+leds[15] << RAC_movement:inst1.x_leds[3]
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1
+CLK => U_D_Bin_Counter4bit:inst3.CLK
+CLK => U_D_Bin_Counter4bit:inst4.CLK
+CLK => counter_y_enabled.CLK
+CLK => counter_x_enabled.CLK
+RESET_n => U_D_Bin_Counter4bit:inst3.RESET_n
+RESET_n => U_D_Bin_Counter4bit:inst4.RESET_n
+RESET_n => y_temp_target[0].ACLR
+RESET_n => y_temp_target[1].ACLR
+RESET_n => y_temp_target[2].ACLR
+RESET_n => y_temp_target[3].ACLR
+RESET_n => x_temp_target[0].ACLR
+RESET_n => x_temp_target[1].ACLR
+RESET_n => x_temp_target[2].ACLR
+RESET_n => x_temp_target[3].ACLR
+RESET_n => y_target_pos[0].ACLR
+RESET_n => y_target_pos[1].ACLR
+RESET_n => y_target_pos[2].ACLR
+RESET_n => y_target_pos[3].ACLR
+RESET_n => x_target_pos[0].ACLR
+RESET_n => x_target_pos[1].ACLR
+RESET_n => x_target_pos[2].ACLR
+RESET_n => x_target_pos[3].ACLR
+CLK_EN => ~NO_FANOUT~
+MOTION_EN => y_temp_target[0].CLK
+MOTION_EN => y_temp_target[1].CLK
+MOTION_EN => y_temp_target[2].CLK
+MOTION_EN => y_temp_target[3].CLK
+MOTION_EN => x_temp_target[0].CLK
+MOTION_EN => x_temp_target[1].CLK
+MOTION_EN => x_temp_target[2].CLK
+MOTION_EN => x_temp_target[3].CLK
+EXTENDER_POS => process_2.IN1
+EXTENDER_POS => process_2.IN1
+x_target[0] => x_temp_target[0].DATAIN
+x_target[1] => x_temp_target[1].DATAIN
+x_target[2] => x_temp_target[2].DATAIN
+x_target[3] => x_temp_target[3].DATAIN
+y_target[0] => y_temp_target[0].DATAIN
+y_target[1] => y_temp_target[1].DATAIN
+y_target[2] => y_temp_target[2].DATAIN
+y_target[3] => y_temp_target[3].DATAIN
+x_leds[0] <= U_D_Bin_Counter4bit:inst3.COUNTER_BITS[0]
+x_leds[1] <= U_D_Bin_Counter4bit:inst3.COUNTER_BITS[1]
+x_leds[2] <= U_D_Bin_Counter4bit:inst3.COUNTER_BITS[2]
+x_leds[3] <= U_D_Bin_Counter4bit:inst3.COUNTER_BITS[3]
+y_leds[0] <= U_D_Bin_Counter4bit:inst4.COUNTER_BITS[0]
+y_leds[1] <= U_D_Bin_Counter4bit:inst4.COUNTER_BITS[1]
+y_leds[2] <= U_D_Bin_Counter4bit:inst4.COUNTER_BITS[2]
+y_leds[3] <= U_D_Bin_Counter4bit:inst4.COUNTER_BITS[3]
+Error_led <= Error_led$latch.DB_MAX_OUTPUT_PORT_TYPE
+is_not_moving <= process_2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst1
+compx4_a[0] => Compx1:inst4.compx1_a
+compx4_a[1] => Compx1:inst3.compx1_a
+compx4_a[2] => Compx1:inst2.compx1_a
+compx4_a[3] => Compx1:inst1.compx1_a
+compx4_b[0] => Compx1:inst4.compx1_b
+compx4_b[1] => Compx1:inst3.compx1_b
+compx4_b[2] => Compx1:inst2.compx1_b
+compx4_b[3] => Compx1:inst1.compx1_b
+compx4_lt <= compx4_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx4_eq <= compx4_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx4_gt <= compx4_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst1|Compx1:inst1
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst1|Compx1:inst2
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst1|Compx1:inst3
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst1|Compx1:inst4
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst2
+compx4_a[0] => Compx1:inst4.compx1_a
+compx4_a[1] => Compx1:inst3.compx1_a
+compx4_a[2] => Compx1:inst2.compx1_a
+compx4_a[3] => Compx1:inst1.compx1_a
+compx4_b[0] => Compx1:inst4.compx1_b
+compx4_b[1] => Compx1:inst3.compx1_b
+compx4_b[2] => Compx1:inst2.compx1_b
+compx4_b[3] => Compx1:inst1.compx1_b
+compx4_lt <= compx4_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx4_eq <= compx4_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx4_gt <= compx4_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst2|Compx1:inst1
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst2|Compx1:inst2
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst2|Compx1:inst3
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|Compx4:inst2|Compx1:inst4
+compx1_a => compx1_eq.IN0
+compx1_a => compx1_gt.IN0
+compx1_a => compx1_lt.IN0
+compx1_b => compx1_lt.IN1
+compx1_b => compx1_eq.IN1
+compx1_b => compx1_gt.IN1
+compx1_lt <= compx1_lt.DB_MAX_OUTPUT_PORT_TYPE
+compx1_eq <= compx1_eq.DB_MAX_OUTPUT_PORT_TYPE
+compx1_gt <= compx1_gt.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|U_D_Bin_Counter4bit:inst3
+CLK => ud_bin_counter[0].CLK
+CLK => ud_bin_counter[1].CLK
+CLK => ud_bin_counter[2].CLK
+CLK => ud_bin_counter[3].CLK
+RESET_n => ud_bin_counter[0].ACLR
+RESET_n => ud_bin_counter[1].ACLR
+RESET_n => ud_bin_counter[2].ACLR
+RESET_n => ud_bin_counter[3].ACLR
+CLK_EN => process_0.IN0
+CLK_EN => process_0.IN0
+UP1_DOWN0 => process_0.IN1
+UP1_DOWN0 => process_0.IN1
+COUNTER_BITS[0] <= ud_bin_counter[0].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[1] <= ud_bin_counter[1].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[2] <= ud_bin_counter[2].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[3] <= ud_bin_counter[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_movement:inst1|U_D_Bin_Counter4bit:inst4
+CLK => ud_bin_counter[0].CLK
+CLK => ud_bin_counter[1].CLK
+CLK => ud_bin_counter[2].CLK
+CLK => ud_bin_counter[3].CLK
+RESET_n => ud_bin_counter[0].ACLR
+RESET_n => ud_bin_counter[1].ACLR
+RESET_n => ud_bin_counter[2].ACLR
+RESET_n => ud_bin_counter[3].ACLR
+CLK_EN => process_0.IN0
+CLK_EN => process_0.IN0
+UP1_DOWN0 => process_0.IN1
+UP1_DOWN0 => process_0.IN1
+COUNTER_BITS[0] <= ud_bin_counter[0].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[1] <= ud_bin_counter[1].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[2] <= ud_bin_counter[2].DB_MAX_OUTPUT_PORT_TYPE
+COUNTER_BITS[3] <= ud_bin_counter[3].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_extender:inst2
+clk_input => current_state~1.DATAIN
+rst_n => process_0.IN1
+rst_n => DIRECTION_UP1_DOWN0.ACLR
+rst_n => current_state~3.DATAIN
+extender_toggle => DIRECTION_UP1_DOWN0.CLK
+extender_enabled => process_0.IN1
+extender_output <= extender_output.DB_MAX_OUTPUT_PORT_TYPE
+state_output[0] <= state_output[0].DB_MAX_OUTPUT_PORT_TYPE
+state_output[1] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+state_output[2] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+state_output[3] <= extender_output.DB_MAX_OUTPUT_PORT_TYPE
+fully_extended <= fully_extended.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|LogicalStep_Lab4_top|RAC_grappler:inst3
+rst_n => grappler_state.ACLR
+grappler_toggle => grappler_state.CLK
+fully_extended => grappler_state.ENA
+grappler_open1_closed0 <= grappler_state.DB_MAX_OUTPUT_PORT_TYPE
+
+

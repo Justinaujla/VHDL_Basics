@@ -1,0 +1,11 @@
+
+State Machine - |LogicalStep_Lab4_top|RAC_extender:inst2|current_state
+Name current_state.State_3rd_retract current_state.State_2nd_retract current_state.State_1st_retract current_state.State_extended current_state.State_3rd_extend current_state.State_2nd_extend current_state.State_1st_extend current_state.State_retracted 
+current_state.State_retracted 0 0 0 0 0 0 0 0 
+current_state.State_1st_extend 0 0 0 0 0 0 1 1 
+current_state.State_2nd_extend 0 0 0 0 0 1 0 1 
+current_state.State_3rd_extend 0 0 0 0 1 0 0 1 
+current_state.State_extended 0 0 0 1 0 0 0 1 
+current_state.State_1st_retract 0 0 1 0 0 0 0 1 
+current_state.State_2nd_retract 0 1 0 0 0 0 0 1 
+current_state.State_3rd_retract 1 0 0 0 0 0 0 1 
